@@ -40,7 +40,7 @@ group :development, :test do
   gem 'factory_bot_rails'
 end
 
-gem 'bootstrap'
+gem 'bootstrap-sass'
 
 group :development do
   gem 'guard-rspec'
