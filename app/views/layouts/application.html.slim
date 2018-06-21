@@ -9,4 +9,11 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
+    - if current_user
+      p = current_user.name
+    - else
+      p
+        a{href: }
+
     = yield
+        }
