@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Email:
+  =< @user.email
+p
+  strong Age:
+  =< @user.age
+p
+  strong Sexuality:
+  =< @user.sexuality
+p
+  strong Member Since:
+  =< @user.created_at
+p
+  strong Birthday:
+  =< @user.birthday
+
+=> link_to 'Edit', edit_user_path(@user)
+'|
+=< link_to 'Back', users_path

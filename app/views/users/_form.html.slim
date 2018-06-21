@@ -1,0 +1,37 @@
+= form_with model: @user, id: 'user-form' do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    .field.form-control
+      = f.label :age
+      = f.text_field :age
+  .form-group
+    .field.form-control
+      = f.label :email
+      = f.text_field :email
+  .form-group
+    .field.form-control
+      = f.select :sexuality, User.sexualities.map { |sex, int_val| [sex.titleize, sex] }
+  .form-group
+    .field.form-control
+      = f.label :birthday
+      = f.date_select :birthday
+  .form-group
+    .field.form-control
+      = f.label :password
+      = f.text_field :password
+  .form-group
+    .field.form-control
+      = f.label :password_confirmation
+      = f.text_field :password_confirmation
+  .form-group
+    .field.form-control
+      = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false
+      = f.check_box :authorized
+  .form-group
+    #submit.actions = f.submit
