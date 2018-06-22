@@ -9,11 +9,12 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    - if current_user
-      p = current_user.name
+    - if @current_user
+      p = @current_user.name
     - else
       p
-        a{href: }
+        a href=(root_url) title='What the shit'
+          | Sign up Here
+
 
     = yield
-        }

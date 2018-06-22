@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_21_002958) do
+ActiveRecord::Schema.define(version: 2018_06_22_202855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dogs", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_dogs_on_name"
+    t.index ["owner_id"], name: "index_dogs_on_owner_id"
+  end
 
   create_table "jails", force: :cascade do |t|
     t.string "name"
@@ -50,13 +60,13 @@ ActiveRecord::Schema.define(version: 2018_06_21_002958) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "age"
     t.integer "sexuality", default: 0
-    t.datetime "created_at", default: "2018-06-21 07:42:37", null: false
-    t.datetime "updated_at", default: "2018-06-21 07:42:37", null: false
+    t.datetime "created_at", default: "2018-06-21 20:05:42", null: false
+    t.datetime "updated_at", default: "2018-06-21 20:05:42", null: false
     t.datetime "deleted_at"
     t.string "password_digest"
     t.date "birthday", null: false
+    t.integer "age"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 

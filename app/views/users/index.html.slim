@@ -12,14 +12,14 @@ table#users-index
   tbody
     - @users.each do |user|
       tr
-        td = user.email
-        td = user.age
-        td = user.sexuality
-        td = user.created_at
-        td = user.birthday
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: { confirm: 'Are you sure?', remote: true }, method: :delete
+        td =< user.email
+        td =< user.age
+        td =< user.sexuality
+        td =< user.created_at
+        td =< user.birthday
+        td =< link_to 'Show', user
+        td =< link_to 'Edit', edit_user_path(user)
+        td =< link_to 'Destroy', user, data: { confirm: 'Are you sure?', remote: true }, method: :delete
 
 br
 
