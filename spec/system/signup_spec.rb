@@ -18,10 +18,11 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         fill_in "user[age]", with: joe[:age]
         fill_in "user[password]", with: joe[:password]
         fill_in "user[password_confirmation]", with: joe[:password]
-        check 'user[authorized]'
+        check 'authorized?'
         click_button 'Create User'
       end
 
+      byebug
       expect(page.current_path).to match /users\/\d+/
       expect(page).to have_content('joe@gmail.com')
     end

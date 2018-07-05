@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.describe 'login', type: :system do
   before do
-    driven_by(:selenium)
+    # driven_by(:selenium)
+    driven_by(:rack_test)
   end
   it '' do
     visit root_path
