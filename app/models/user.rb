@@ -27,7 +27,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
 
   # def age_confirmation_converter!
-  #   byebug
   #   age_confirmation = age_confirmation.to_i
   # end
   # accepts_nested_attributes_for :dogs, allow_destroy: true

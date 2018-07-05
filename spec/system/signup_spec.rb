@@ -22,7 +22,6 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         click_button 'Create User'
       end
 
-      byebug
       expect(page.current_path).to match /users\/\d+/
       expect(page).to have_content('joe@gmail.com')
     end
