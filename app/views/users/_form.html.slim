@@ -4,19 +4,18 @@
     ul
       - @user.errors.full_messages.each do |message|
         li = message
-= form_with model: @user, id: 'user-form' do |f|
-
+= form_with model: @user, local: true, id: 'user-form' do |f|
   .form-group
     .field.form-control
       = f.label :age, 'Age'
-      = f.text_field :age
+      = f.text_field :age, required: true, title: 'Age must be an integer', pattern: '\d+',  data: {confirm: 'are you sure this is your real age?'}
   .form-group
     .field.form-control
       = f.label :email
-      = f.text_field :email
+      = f.text_field :email, required: true, title: 'Please enter a valid email address', pattern: ".+@.+\.com"
   .form-group
     .field.form-control
-      = f.select :sexuality, User.sexualities.map { |sex, int_val| [sex.titleize, sex] }
+      = f.select :sexuality, User.sexualities.map { |sex, int_val| [sex.titleize, sex] }.insert(0, '')
   .form-group
     .field.form-control
       = f.label :birthday
@@ -24,14 +23,23 @@
   .form-group
     .field.form-control
       = f.label :password
-      = f.text_field :password
+      = f.text_field :password, required: true
   .form-group
     .field.form-control
       = f.label :password_confirmation
-      = f.text_field :password_confirmation
+      = f.text_field :password_confirmation, required: true
   .form-group
     .field.form-control
-      = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false
+      = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false, required: true
       = f.check_box :authorized
   .form-group
-    #submit.actions.btn.btn-info = f.submit
+    .field.form-control
+      = f.fields_for :dogs do |dog_builder|
+        = dog_builder.label :name
+        = dog_builder.text_field :name
+
+        = dog_builder.label :age
+        = dog_builder.text_field :age
+  .form-group
+    #submit.actions.btn.btn-info = f.submit 'Submit', data: {disable_with: 'Doing the deed...'}
+

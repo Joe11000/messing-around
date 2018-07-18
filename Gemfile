@@ -33,11 +33,11 @@ gem 'paranoia'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
+  gem 'chromedriver-helper'
 end
 
 gem 'bootstrap-sass'
@@ -50,14 +50,18 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'rails-erd'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem 'faker'
   gem 'shoulda-matchers'
+end
+
+group :development, :test do
+  gem 'faker'
 end
 
 gem 'jquery-rails'

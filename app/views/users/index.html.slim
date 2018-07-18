@@ -20,7 +20,28 @@ table#users-index
         td =< link_to 'Show', user
         td =< link_to 'Edit', edit_user_path(user)
         td =< link_to 'Destroy', user, data: { confirm: 'Are you sure?', remote: true }, method: :delete
+        /! td = render(partial: 'dogs/index', dogs: user.dogs)
 
 br
 
 = link_to 'New User', new_user_path
+
+
+
+
+
+
+
+/ h2(id="sixteen#{[15,1].sum}" class='sixteen#{15 + 1}') = 15 + 1
+/ ul
+/   li.hope1: span Hope #{1 + 0}
+/   li[class='hope2']: a[href='www.chicagobears.com'] hope "#{2}"
+/   <li class='hope3'>Hope #{1+2}</li>
+/   li data-id='hope4'
+/     | Hope #{2 + 2}
+/     span WHat the Shit
+/     | More things
+/     ul
+/       li Inner1
+/       li Inner2
+/       li Inner3

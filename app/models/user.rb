@@ -1,10 +1,22 @@
 class User < ApplicationRecord
-  has_many :pictures, as: :imageable
+  self.lock_optimistically = true
 
-  # validates_with ::EmailValidator
   has_secure_password
   acts_as_paranoid
+
+  has_many :pictures, as: :imageable
+
+  # has_many :dogs_i_like, foreign_key: 'owner_id', dependent: :restrict_with_error
+  has_many :dogs, inverse_of: :owner, foreign_key: 'owner_id', dependent: :restrict_with_error, before_add: :restrict_to_twenty_adoptions
+  has_many :recent_adoptions, -> {where('dogs.created_at > ?', 1.hour.ago)}, class_name: 'Dog', foreign_key: 'owner_id'
+  accepts_nested_attributes_for :dogs, allow_destroy: true
+
+  scope :old, -> {where('age > 50')}
+
+
+  # validates_with ::EmailValidator
   enum sexuality: ['straight', 'bi', 'gay', 'trans']
+  enum security_clearance: ['user', 'admin']
   # validates :age, :sexuality, desireable: true
   validates :age, presence: true,
                   numericality: {
@@ -12,26 +24,24 @@ class User < ApplicationRecord
                                   maximum: 60,
                                   greater_than_or_equal_to: 1,
                                   message: "number must be larger than 0",
-                                  too_long: 'You are too old now. Time to die.'
+                                  too_long: 'You are too old now. Have you thought about moving to Florida?'
                                 }
 
   validates :authorized, acceptance: true# { accept: 'yes'}
 
-  validates :email, confirmation: {case_sensative: false}, on: :create
+  # validates :email, confirmation: {case_sensative: false}, on: :create
   validates :email, presence: true,
                     format: { with: /\A.*@.*\.com\z/, message: "only allows letters" }
 
   validates :sexuality, inclusion: { in: User.sexualities.keys }
   validates :email, :age, presence: true
 
-  validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
+  # validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
 
   # def age_confirmation_converter!
   #   age_confirmation = age_confirmation.to_i
   # end
-  # accepts_nested_attributes_for :dogs, allow_destroy: true
   # validates_associated :dogs
-  has_many :dogs, inverse_of: :owner, foreign_key: 'owner_id', class_name: 'Dog'
 
 
     # validates :email, uniqueness: true
@@ -45,6 +55,14 @@ class User < ApplicationRecord
   # validates :email, length: {maximum: 5}
   # validates :email, length: { in: 5..5 }
   # validates :email, numericality: {only_integer: true}
+
+  def clock_in
+    puts 'Time to babysit some dogs'
+  end
+
+  def restrict_to_twenty_adoptions
+    raise if dogs.count >= 20
+  end
 end
 
 

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @dog.name
+p
+  strong Age:
+  = @dog.age
+p
+  strong References:
+  = @dog.references
+
+=> link_to 'Edit', edit_dog_path(@dog)
+'|
+=< link_to 'Back', dogs_path

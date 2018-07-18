@@ -6,7 +6,6 @@ class DesireableValidator < ActiveModel::Validator
 
   def validate record
     unless record.age > 21 && record.age < 32 && record.sexuality == 'straight'
-      if record.errors.add(:can_date_me, "Can not date joe")
     end
   end
 end

@@ -1,0 +1,2 @@
+class FetchToy < Toy
+end

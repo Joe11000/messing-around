@@ -1,0 +1,2 @@
+class SqueekyToy < Toy
+end

@@ -6,4 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-3.times { User.create }
+# 3.times { User.create }
+
+FactoryBot.create_list(:dog, 25) do |dog|
+  dog.toys.create(FactoryBot.attributes_for_list(:squeeky_toy, 2) )
+  dog.toys.create(FactoryBot.attributes_for_list(:fetch_toy, 2) )
+end
+
+FactoryBot.create :user, :dog_sitter

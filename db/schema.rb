@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_04_061822) do
+ActiveRecord::Schema.define(version: 2018_07_17_212251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,15 @@ ActiveRecord::Schema.define(version: 2018_07_04_061822) do
   end
 
   create_table "dogs", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "name"
     t.integer "age"
+    t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_dogs_on_deleted_at"
     t.index ["name"], name: "index_dogs_on_name"
-    t.index ["user_id"], name: "index_dogs_on_user_id"
-  end
-
-  create_table "jails", force: :cascade do |t|
-    t.string "name"
+    t.index ["owner_id"], name: "index_dogs_on_owner_id"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -57,46 +55,35 @@ ActiveRecord::Schema.define(version: 2018_07_04_061822) do
     t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
-  create_table "prisoner", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "jail_id", null: false
-    t.integer "time"
-    t.integer "number"
+  create_table "suppliers", force: :cascade do |t|
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "sku", limit: 10
-    t.integer "count"
-    t.text "description"
-    t.bigint "supplier_id"
-    t.float "popularity"
-    t.decimal "price", precision: 10, scale: 2
-    t.boolean "available"
-    t.datetime "availableSince"
-    t.binary "image"
+  create_table "toys", force: :cascade do |t|
+    t.string "type"
+    t.integer "fun_level", default: 0
+    t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "size"
-    t.index ["name"], name: "index_products_on_name"
-    t.index ["sku"], name: "index_products_on_sku", unique: true
-    t.index ["supplier_id"], name: "index_products_on_supplier_id"
-  end
-
-  create_table "suppliers", force: :cascade do |t|
+    t.bigint "dog_id"
+    t.index ["dog_id"], name: "index_toys_on_dog_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.integer "sexuality", default: 0
-    t.datetime "created_at", default: "2018-07-04 00:30:01", null: false
-    t.datetime "updated_at", default: "2018-07-04 00:30:01", null: false
+    t.datetime "created_at", default: "2018-07-17 23:07:06", null: false
+    t.datetime "updated_at", default: "2018-07-17 23:07:06", null: false
     t.datetime "deleted_at"
     t.string "password_digest"
     t.date "birthday", null: false
     t.integer "age"
+    t.integer "security_clearance", default: 0
+    t.string "name"
+    t.integer "counter_cache"
+    t.integer "dogs_count"
+    t.integer "lock_version"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
-  add_foreign_key "products", "suppliers"
+  add_foreign_key "toys", "dogs"
 end
