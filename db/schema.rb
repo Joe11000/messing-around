@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2018_07_17_212251) do
     t.integer "age"
     t.integer "security_clearance", default: 0
     t.string "name"
-    t.integer "counter_cache"
+    t.integer "counter_cache", default: 0
     t.integer "dogs_count"
     t.integer "lock_version"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
