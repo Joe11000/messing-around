@@ -4,7 +4,26 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+        # render options
+      # :content_type
+      # :layout
+      # :location
+      # :status
+      # :formats
     @users = User.all
+    # redirect_to (new_force_user_path )
+    # redirect_to (force_user_path ForceUser.first)
+    # render plain: "What is going on here"
+    # render inline: "What is going on here #{Jedi.pluck(:name).join(", ")}?"
+    # render 'new'
+    # render file: '/Users/joe/Dropbox/coding/coding/ruby/rails/wip/rails5/sith_lineage/app/views/force_users/index.html.slim', layout: false
+    # render template: 'force_users/index.json.jbuilder'
+    # render json: @force_users
+    # render js: "document.write(\"from\") "
+    # render  location: 'http://www.chicagobears.com', status: 303,
+    # redirect_to new_force_user_path, status: :forbidden
+    # render 'index', formats: [:json, :html]
+    render json: @force_users
   end
 
   # GET /users/1

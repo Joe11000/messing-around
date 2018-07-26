@@ -1,6 +1,8 @@
-json.extract! @user, *User.attribute_names
-
-
+json.(user, *User.attribute_names)
+json.set! 'dog_owner' do
+  # json.extract! user, :name, :age
+  json.(user, :name, :age)
+end
 
 
 
