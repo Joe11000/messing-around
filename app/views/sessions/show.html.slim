@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong New:
+  = @session.new
+p
+  strong Create:
+  = @session.create
+p
+  strong Destroy:
+  = @session.destroy
+
+=> link_to 'Edit', edit_session_path(@session)
+'|
+=< link_to 'Back', sessions_path

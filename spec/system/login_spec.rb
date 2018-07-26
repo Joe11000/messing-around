@@ -6,8 +6,11 @@ RSpec.describe 'login', type: :system do
     # driven_by(:rack_test)
   end
   it '' do
+    FactoryBot.create :user
+
     visit root_path
     expect(page.current_path).to eq root_path
+    expect(page).to redirect_to user
   end
 end
 
