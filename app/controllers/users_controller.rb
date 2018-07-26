@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  layout 'application2'
+  layout 'application'
+  before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :index]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -19,12 +20,14 @@ class UsersController < ApplicationController
     # render 'new'
     # render file: '/Users/joe/Dropbox/coding/coding/ruby/rails/wip/rails5/sith_lineage/app/views/force_users/index.html.slim', layout: false
     # render template: 'force_users/index.json.jbuilder'
-    # render json: @force_users
+    # render json: @users
     # render js: "document.write(\"from\") "
     # render  location: 'http://www.chicagobears.com', status: 303,
     # redirect_to new_force_user_path, status: :forbidden
     # render 'index', formats: [:json, :html]
-    render json: @force_users
+    # render json: @users and return
+    # head 302, location: 'http://www.chicagobears.com'
+    # head 418 and return
   end
 
   # GET /users/1
@@ -86,6 +89,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      @current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

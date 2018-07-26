@@ -1,11 +1,17 @@
+br
+br
+br
+= link_to 'New Dog', new_dog_path
+
 h1 Listing dogs
+
 
 table
   thead
     tr
       th Name
       th Age
-      th References
+      th Owner
       th
       th
       th
@@ -16,11 +22,8 @@ table
       tr
         td = dog.name
         td = dog.age
-        td = dog.references
+        td = dog.owner.try(:name) || ''
         td = link_to 'Show', dog
         td = link_to 'Edit', edit_dog_path(dog)
         td = link_to 'Destroy', dog, data: { confirm: 'Are you sure?' }, method: :delete
-        td = link_to 'Destroy All Dogs', dogs
-br
 
-= link_to 'New Dog', new_dog_path

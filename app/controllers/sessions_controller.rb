@@ -1,13 +1,14 @@
 class SessionsController < ApplicationController
-
   # POST /sessions
   # POST /sessions.json
   def create
+    byebug
     @user = User.find_by_email(session_params[:email]))
 
     respond_to do |format|
       if @user.validate session_params[:password]
-        format.html { redirect_to @session, notice: "Successfully Logged in as #{@user.email}." }
+        session[:user_id] = @user.id
+        format.html { redirect_to @user, notice: "Successfully Logged in as #{@user.email}." }
         format.json { render :show, status: :created, location: @session }
       else
         format.html { render :new }
@@ -29,11 +30,6 @@ class SessionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_session
-      @session = User.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_params
       params.require(:session).permit(:email, :password)
