@@ -5,7 +5,7 @@ class Dog < ApplicationRecord
 
   scope :puppies, ->{ where('age < 4') }
 
-  belongs_to :owner, -> { where 'users.sexuality = 1' },
+  belongs_to :owner, #-> { where 'users.sexuality = 1' },
                      class_name: 'User',
                      foreign_key: 'owner_id',
                      inverse_of: :dogs,

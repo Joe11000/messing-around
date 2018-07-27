@@ -1,4 +1,25 @@
-= audio_tag 'sith.mp3', autoplay: true, controls: true, autobuffer: true, loop: true
+- content_for :head
+  title Can a dog have his day?
+
+
+
+- if local_assigns[:dogs]
+  p there are dogs present
+
+#partial-trial
+  / = render partial: 'sample_partial',layout: 'dogs_layout_for_partials', locals:{dog: Dog.first}
+  /= render 'sample_partial', layout: 'dogs_layout_for_partials', dog: Dog.first
+
+  / - @user = Dog.first.owner
+  / = render @user
+  / - @users = User.all
+  / = render @users
+  = render User.all.zip(Dog.all).flatten
+
+= audio_tag('sith.mp3', controls: true, autobuffer: true, loop: true)
+/, autoplay: true
+
+
 /= video_tag(asset_path('snapchat.mp4'), {poster: 'dog.jpg', autoplay: true, loop: true, controls: true, preload: true, height: '400px'})
 /= image_tag 'dog', {id: 'happy-dog', class: 'happy-dog', alt: 'Happy Dog', width: '300px'}
 br
@@ -30,6 +51,6 @@ table
         td = link_to 'Destroy', dog, data: { confirm: 'Are you sure?' }, method: :delete
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bke0fmR9lx0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NVb5GV6lntU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
   <p>No iframes supported</p>
 </iframe>
