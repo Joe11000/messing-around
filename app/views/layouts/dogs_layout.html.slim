@@ -8,16 +8,12 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-    = audio_tag '/Users/joe/Dropbox/Music/iTunes\ Media/John\ Williams/Unknown\ Album/Darth\ Vader\ Ringtone.mp3'
     / = javascript_include_tag 'users'
   body
-    - byebug
-    - if @current_user.try(:dogs_count) > 0
-      p = @current_user.dogs.pluck(:name).join(', ')
-    - else
-      p
-        a href=(root_url) title='Why?'
-          | Go Get some Dogs
+    p
+      a href=(root_url) title='Why?'
+        | Go Get some Dogs
 
     p Dog's Layout
     = yield
+

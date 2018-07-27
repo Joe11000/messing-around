@@ -1,8 +1,10 @@
+= audio_tag 'sith.mp3', autoplay: true, controls: true, autobuffer: true, loop: true
+/= video_tag(asset_path('snapchat.mp4'), {poster: 'dog.jpg', autoplay: true, loop: true, controls: true, preload: true, height: '400px'})
+/= image_tag 'dog', {id: 'happy-dog', class: 'happy-dog', alt: 'Happy Dog', width: '300px'}
 br
 br
 br
 = link_to 'New Dog', new_dog_path
-
 h1 Listing dogs
 
 
@@ -27,3 +29,7 @@ table
         td = link_to 'Edit', edit_dog_path(dog)
         td = link_to 'Destroy', dog, data: { confirm: 'Are you sure?' }, method: :delete
 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bke0fmR9lx0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  <p>No iframes supported</p>
+</iframe>

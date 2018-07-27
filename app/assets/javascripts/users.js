@@ -1,5 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-el = document.querySelectorAll('body')
-el.style.backgroundColor = blue;
+$(function() {
+    alert( "users.js!" );
+  el = document.querySelectorAll('td')[0].style.color = 'green'
+});
