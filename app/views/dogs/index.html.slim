@@ -10,16 +10,16 @@
   p there are dogs present
 
 #partial-trial
-  = render partial: 'sample_partial',layout: 'dogs_layout_for_partials', locals:{dog: Dog.first}
+  = render partial: 'sample_partial', layout: 'dogs_layout_for_partials', locals: {dog: Dog.first}
 
-  p single user
-  - @user = Dog.first.owner
-  = render @user
-  p all users
-  - @users = User.all
-  = render partial: @users, layout: 'dogs_layout_for_partials'
+  / p single user
+  / - @user = Dog.first.owner
+  / = render @user
+  / p all users
+  / - @users = User.all
+  / = render partial: @users, layout: 'dogs_layout_for_partials'
 
-  = render User.all.zip(Dog.all).flatten
+  = render User.all.zip(Dog.all).flatten, spacer_template: 'shared/spacer_template'
 
 
 
