@@ -3,25 +3,34 @@
 
 
 
+= audio_tag('sith.mp3', controls: true, autobuffer: true, loop: true)
+/, autoplay: true)
+
 - if local_assigns[:dogs]
   p there are dogs present
 
 #partial-trial
-  / = render partial: 'sample_partial',layout: 'dogs_layout_for_partials', locals:{dog: Dog.first}
-  /= render 'sample_partial', layout: 'dogs_layout_for_partials', dog: Dog.first
+  = render partial: 'sample_partial',layout: 'dogs_layout_for_partials', locals:{dog: Dog.first}
 
-  / - @user = Dog.first.owner
-  / = render @user
-  / - @users = User.all
-  / = render @users
+  p single user
+  - @user = Dog.first.owner
+  = render @user
+  p all users
+  - @users = User.all
+  = render partial: @users, layout: 'dogs_layout_for_partials'
+
   = render User.all.zip(Dog.all).flatten
 
-= audio_tag('sith.mp3', controls: true, autobuffer: true, loop: true)
-/, autoplay: true
 
 
-/= video_tag(asset_path('snapchat.mp4'), {poster: 'dog.jpg', autoplay: true, loop: true, controls: true, preload: true, height: '400px'})
-/= image_tag 'dog', {id: 'happy-dog', class: 'happy-dog', alt: 'Happy Dog', width: '300px'}
+= video_tag(asset_path('snapchat.mp4'), {poster: 'dog.jpg', autoplay: true, loop: true, controls: true, preload: true, height: '200px'})
+br
+br
+figure
+  = image_tag 'dog', {id: 'happy-dog', class: 'happy-dog', alt: 'Happy Dog', width: '150px', caption: 'what the shit'}
+  / <img src="../html/pic_trulli.jpg" alt="Trulli" style="width:100%">
+  figcaption Happy Puppy With Watermelon
+
 br
 br
 br

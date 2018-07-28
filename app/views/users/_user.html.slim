@@ -1,7 +1,7 @@
 /p Joe created this partial
 p
-  - if user_counter
-    => "#{user_counter})"
+  - if local_assigns[:user_counter]
+    => "#{local_assigns[:user_counter]})"
   | Captain
   span#user-name
     strong =<> user.name
