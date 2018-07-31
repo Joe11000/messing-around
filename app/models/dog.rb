@@ -4,6 +4,8 @@ class Dog < ApplicationRecord
   has_many :pictures, as: :imageable
 
   scope :puppies, ->{ where('age < 4') }
+  scope :adopted, -> { where('owner_id > 0') }
+  scope :not_adopted, -> { where('owner_id IS NULL') }
 
   belongs_to :owner, #-> { where 'users.sexuality = 1' },
                      class_name: 'User',

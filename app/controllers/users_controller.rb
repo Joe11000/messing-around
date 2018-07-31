@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     # render json: @users and return
     # head 302, location: 'http://www.chicagobears.com'
     # head 418 and return
+    render 'mess_around_template'
   end
 
   # GET /users/1
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    byebug
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
