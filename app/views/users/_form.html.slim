@@ -16,7 +16,7 @@
   .form-group.col-lg-4.col-offset-2.clearfix
     .field.form-control
       = f.select :sexuality, (User.sexualities.map { |sex, int_val| [sex.titleize, sex] }).insert(0, '')
-  .form-group.col-lg-4.col-offset-2.clearfix.sup
+  .form-group.col-lg-4.col-offset-2.clearfix.whatsup
     .field.form-control
       = f.label :birthday
       = f.date_select :birthday
