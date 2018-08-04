@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout 'application'
   before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :index]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     # render template: 'force_users/index.json.jbuilder'
     # render json: @users
     # render js: "document.write(\"from\") "
-    # render  location: 'http://www.chicagobears.com', status: 303,
+    # render  location: 'http://www.chicagobears.com', status: 303
     # redirect_to new_force_user_path, status: :forbidden
     # render 'index', formats: [:json, :html]
     # render json: @users and return
@@ -43,6 +43,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    byebug
+    @user = User.includes(:dogs).find_by(user: user_params[:id])
   end
 
   # POST /users

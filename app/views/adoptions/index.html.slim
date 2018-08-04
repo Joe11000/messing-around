@@ -1,0 +1,25 @@
+h1 Listing adoptions
+
+table
+  thead
+    tr
+      th Person
+      th Dog
+      th
+      th
+      th
+
+  tbody
+    - @adoptions.each do |adoption|
+
+      tr
+        td = adoption.user.name
+        td = adoption.dog.name
+
+        td = link_to 'Show', adoption
+        td = link_to 'Edit', edit_adoption_path(adoption)
+        td = link_to 'Destroy', adoption, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Adoption', new_adoption_path
