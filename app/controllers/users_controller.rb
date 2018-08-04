@@ -28,7 +28,9 @@ class UsersController < ApplicationController
     # render json: @users and return
     # head 302, location: 'http://www.chicagobears.com'
     # head 418 and return
+    @user = User.first
     render 'mess_around_template'
+
   end
 
   # GET /users/1
