@@ -5,18 +5,18 @@
       - @user.errors.full_messages.each do |message|
         li = message
 = form_with model: @user, local: true, id: 'user-form' do |f|
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-4.col-offset-2.clearfix
     .field.form-control
       = f.label :age, 'Age'
       = f.text_field :age, required: true, title: 'Age must be an integer', pattern: '\d+',  data: {confirm: 'are you sure this is your real age?'}
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-4.col-offset-2.clearfix
     .field.form-control
       = f.label :email
       = f.text_field :email, required: true, title: 'Please enter a valid email address', pattern: ".+@.+\.com"
   .form-group.col-lg-4.col-offset-2.clearfix
     .field.form-control
       = f.select :sexuality, (User.sexualities.map { |sex, int_val| [sex.titleize, sex] }).insert(0, '')
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .form-group.col-lg-4.col-offset-2.clearfix.sup
     .field.form-control
       = f.label :birthday
       = f.date_select :birthday
