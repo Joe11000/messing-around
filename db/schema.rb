@@ -69,19 +69,19 @@ ActiveRecord::Schema.define(version: 2018_07_17_212251) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.integer "sexuality", default: 0
-    t.datetime "created_at", default: "2018-07-17 23:07:06", null: false
-    t.datetime "updated_at", default: "2018-07-17 23:07:06", null: false
-    t.datetime "deleted_at"
-    t.string "password_digest"
-    t.date "birthday", null: false
     t.integer "age"
-    t.integer "security_clearance", default: 0
-    t.string "name"
+    t.date "birthday", null: false
     t.integer "counter_cache", default: 0
+    t.datetime "created_at", default: "2018-07-17 23:07:06", null: false
+    t.datetime "deleted_at"
     t.integer "dogs_count"
+    t.string "email"
     t.integer "lock_version"
+    t.string "name"
+    t.string "password_digest"
+    t.integer "sexuality", default: 0
+    t.integer "security_clearance", default: 0
+    t.datetime "updated_at", default: "2018-07-17 23:07:06", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 

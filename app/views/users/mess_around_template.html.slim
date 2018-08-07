@@ -1,50 +1,62 @@
-= form_with model: User.first do |f|
-  p Form Contents
-  = f.label :name
-  = f.text_field :name
+/ = form_with model: User.first do |f|
+/   p Form Contents
+/   = f.label :name
+/   = f.text_field :name
 
-  = f.submit
+/   = f.submit
 
-= form_tag 'search', method: :get do
-  = label_tag :search_item, "Search For:"
-  = text_field_tag :search_item
-  = submit_tag "Search"
+/ = form_tag 'search', method: :get do
+/   = label_tag :search_item, "Search For:"
+/   = text_field_tag :search_item
+/   = submit_tag "Search"
 
-= form_tag({controller: "users", action: 'index'}, {method: :get, class: 'nifty_form'})
+/ = form_tag({controller: "users", action: 'index'}, {method: :get, class: 'nifty_form'})
 
-= form_tag("/users", {method: :post, class: 'nifty_form'}) do
-  = check_box_tag :pet_dog
-  = label_tag :pet_dog, 'I have a dog'
-  = check_box_tag :pet_cat
-  = label_tag :pet_cat, 'I own a pet cat'
-  br
-  = radio_button_tag :age, 'child'
-  = label_tag :child, 'I am a child'
-  = radio_button_tag :age, 'adult', selected: true
-  = label_tag :adult, 'I am an adult'
+/ = form_tag("/users", {method: :post, class: 'nifty_form'}) do
+/   = check_box_tag :pet_dog
+/   = label_tag :pet_dog, 'I have a dog'
+/   br
+/   = check_box_tag :pet_cat
+/   = label_tag :pet_cat, 'I own a pet cat'
+/   br
+/   = radio_button_tag :age, 'child'
+/   = label_tag :child, 'I am a child'
+/   br
+/   = radio_button_tag :age, 'adult', selected: true
+/   = label_tag :adult, 'I am an adult'
 
-  = text_area_tag :message, "hi, nice site", size: '24x6'
-  = password_field_tag :password
-  br
-  = hidden_field_tag :hidden_field_tag, 5
-  = label :hidden_field_tag, 'Shhh This is hidden'
-  br
-  = search_field_tag :search, 'default value'
-  = label_tag :search_field
-  br
-  = telephone_field_tag :telephone_field
-  = label :telephone_field, 'telephone field tag'
-  br
-  = date_field :user, :born_on
-  br
-  = datetime_local_field :user, :graduation_day
-  br
-  = month_field :user, :birthday_month
-  br
-  = email_field_tag :email_field_tag
-  br
-  = range_field :range_field, in: 1.0..20.0, step: 0.5, start: 1.5
-  = submit_tag
+/   br
+/   = text_area_tag :message, "hi, nice site", size: '24x6'
+/   br
+/   = password_field_tag :password
+/   br
+/   = hidden_field_tag :hidden_field_tag, 5
+/   = label :hidden_field_tag, 'Shhh This is hidden'
+/   br
+/   = search_field_tag :search, 'default value'
+/   = label_tag :search_field
+/   br
+/   = telephone_field_tag :telephone_field
+/   = label :telephone_field, 'telephone field tag'
+/   br
+/   = date_field :user, :birthday
+/   br
+/   = datetime_local_field :user, :birthday
+/   br
+/   = month_field :user, :birthday
+/   br
+/   = email_field_tag :email_field_tag
+/   br
+/   = range_field :range_field, in: 1.0..20.0, step: 0.5, start: 1.5
+/   = submit_tag
 
 br
+
+= form_tag({ controller: :users, action: :create }, method: :post)
+  = text_area :user, :name
+  br
+  = label :user, 'sexuality'
+  = select :user, :sexuality, User.sexualities
+  br
+  = submit_tag :submit, {method: :post, controller: :users,  }
 

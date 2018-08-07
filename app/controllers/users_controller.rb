@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout 'application'
-  before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :index]
+  # before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :index]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -99,6 +99,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:age, :authorized, :birthday, :email, :password, :password_confirmation, :sexuality)
+      params.require(:user).permit(:age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality)
     end
 end
