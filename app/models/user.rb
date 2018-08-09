@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :pictures, as: :imageable
 
+  before_save :set_created_at_in_timezone
+
   # has_many :dogs_i_like, foreign_key: 'owner_id', dependent: :restrict_with_error
   has_many :dogs, inverse_of: :owner, foreign_key: 'owner_id', dependent: :restrict_with_error, before_add: :restrict_to_twenty_adoptions
   has_many :recent_adoptions, -> {where('dogs.created_at > ?', 1.hour.ago)}, class_name: 'Dog', foreign_key: 'owner_id'
@@ -62,6 +64,10 @@ class User < ApplicationRecord
 
   def restrict_to_twenty_adoptions
     raise if dogs.count >= 20
+  end
+
+  def set_created_at_in_timezone(zone='Osaka')
+    Time.use_zone(zone) { created_at.to_datetime.change(offset: Time.zone.now.strftime("%z")) }
   end
 end
 

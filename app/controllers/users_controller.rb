@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout 'application'
   # before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :index]
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :edit]
 
   # GET /users
   # GET /users.json
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     # render js: "document.write(\"from\") "
     # render  location: 'http://www.chicagobears.com', status: 303
     # redirect_to new_force_user_path, status: :forbidden
+    # redirect_to @user, notice: 'User was successfully created.'
     # render 'index', formats: [:json, :html]
     # render json: @users and return
     # head 302, location: 'http://www.chicagobears.com'
@@ -45,8 +46,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    byebug
-    @user = User.includes(:dogs).find_by(user: user_params[:id])
+    # @user = User.includes(:dogs).find_by(user: user_params[:id])
+
   end
 
   # POST /users
@@ -69,9 +70,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    1 + 1
+    byebug
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, alert: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -94,11 +97,11 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-      @current_user
+      # @current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality)
+      params.require(:user).permit(:age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, :dog_id)
     end
 end

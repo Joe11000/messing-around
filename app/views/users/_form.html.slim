@@ -1,3 +1,6 @@
+- content_for :head
+  = stylesheet_link_tag 'users'
+
 - if @user.errors.any?
   #error_explanation
     h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -5,42 +8,69 @@
       - @user.errors.full_messages.each do |message|
         li = message
 = form_with model: @user, local: true, id: 'user-form' do |f|
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.label :age, 'Age'
       = f.text_field :age, required: true, title: 'Age must be an integer', pattern: '\d+',  data: {confirm: 'are you sure this is your real age?'}
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.label :email
       = f.text_field :email, required: true, title: 'Please enter a valid email address', pattern: ".+@.+\.com"
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
+    .field.form-control
+      = f.search_field :email
+  .form-group.col-lg-4.col-offset-2
+    .field.form-control
+      = f.hidden_field  :portugal, value: 'opus day'
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.select :sexuality, (User.sexualities.map { |sex, int_val| [sex.titleize, sex] }).insert(0, '')
-  .form-group.col-lg-4.col-offset-2.clearfix.whatsup
+  .clearfix
+  .form-group.col-lg-4.col-offset-2.whatsup
     .field.form-control
       = f.label :birthday
-      = f.date_select :birthday
-  .form-group.col-lg-4.col-offset-2.clearfix
+      = f.datetime_select :birthday, start_year: 1920, end_year: 2010
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.label :password
       = f.text_field :password, required: true
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.label :password_confirmation
       = f.text_field :password_confirmation, required: true
-  .form-group.col-lg-4.col-offset-2.clearfix
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
     .field.form-control
       = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false, required: true
       = f.check_box :authorized
-  p Dogs Stuff
-  .form-group.col-lg-4.col-offset-2.clearfix
-    .field.form-control
-      = f.collection_select :dog_id, Dog.not_adopted, :id, :name, {}, { multiple: true, size: 8 }
-
-  .form-group.col-lg-4.col-offset-2
   .clearfix
+  .form-group.col-lg-4.col-offset-2
+    .field.form-control
+      = f.collection_select :dog_id, Dog.not_adopted, :id, :name, {}, { multiple: true, size: 4 }
+
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
+    = f.time_zone_select :birthday
+
   /   .field.form-control
   /     = f.select :dogs, options_for_select()
+  .clearfix
   .form-group
-    #submit.actions.btn.btn-info = f.submit 'Submit', data: {disable_with: 'Doing the deed...'}
+    /- f.fields_for @user.dogs
+    br
+    = f.select_year Time.now, start_year: 1920, end_year: 2010
+  .clearfix
+  .form-group
+    #submit.actions.btn.btn-info = f.submit 'Submit', data: { disable_with: 'Doing the deed...' }
+
+
+
+
+
+
 

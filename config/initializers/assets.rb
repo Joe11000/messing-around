@@ -8,7 +8,8 @@ Rails.application.config.assets.version = '1.0'
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
-Rails.application.config.assets.precompile += %w( dogs.js dogs.css )
+Rails.application.config.assets.precompile += %w( dogs.js dogs.scss )
+Rails.application.config.assets.precompile += %w( users.js users.scss )
 Rails.application.config.assets.precompile += %w( audios/sith.mp3 )
 Rails.application.config.assets.precompile += %w( videos/diving_board.wmv )
 # Precompile additional assets.
