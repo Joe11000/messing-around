@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   # POST /sessions.json
   def create
     byebug
-    @user = User.find_by_email(session_params[:email]))
+    @user = User.find_by_email(session_params[:email])
 
     respond_to do |format|
       if @user.validate session_params[:password]

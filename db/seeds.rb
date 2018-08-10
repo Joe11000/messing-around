@@ -13,4 +13,7 @@ FactoryBot.create_list(:dog, 25) do |dog|
   dog.toys.create(FactoryBot.attributes_for_list(:fetch_toy, 2) )
 end
 
+# create some unadopted dogs
+FactoryBot.create_list(:dog, 5, owner: nil)
+
 FactoryBot.create_list :user, 10, :dog_sitter
