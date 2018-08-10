@@ -72,6 +72,8 @@ class UsersController < ApplicationController
   def update
     1 + 1
     byebug
+    dog_ids_to_associate_with_user = params[:user]['dog_ids'][1..-1]
+    set_user.dogs << Dog.find(dog_ids_to_associate_with_user)
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, alert: 'User was successfully updated.' }
@@ -102,6 +104,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:favorite_numbers, :age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, :dog_id)
+      params.require(:user).permit(:favorite_numbers, :age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, dog_ids: [])
     end
 end

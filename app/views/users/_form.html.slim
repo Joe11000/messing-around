@@ -51,18 +51,18 @@
   .clearfix
   .form-group.col-lg-4.col-offset-2
     .field.form-control
-      = f.collection_check_boxes :dog_id, Dog.not_adopted, :id, :name, {}, { multiple: true, size: 4 }
+      = f.collection_check_boxes :dog_ids, Dog.all, :id, :name
 
   .clearfix
   .form-group.col-lg-4.col-offset-2
     = f.time_zone_select :birthday
 
-  .clearfix
-  .form-group.col-lg-4.col-offset-2
-    / = f.fields_for @user.photoes
-    input type='text' name='user[favorite_numbers][]' value=("what".upcase) data-id=("user_#{@user.id}_favorite_numbers")
-    <input type='text' name='user[favorite_numbers][]'/>
-    <input type='text' name='user[favorite_numbers][]'/>
+  / .clearfix
+  / .form-group.col-lg-4.col-offset-2
+  /   / = f.fields_for @user.photoes
+  /   input type='text' name='user[favorite_numbers][]' value=("what".upcase) data-id=("user_#{@user.id}_favorite_numbers")
+  /   <input type='text' name='user[favorite_numbers][]'/>
+  /   <input type='text' name='user[favorite_numbers][]'/>
 
   .clearfix
   .form-group

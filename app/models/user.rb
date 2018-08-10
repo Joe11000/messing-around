@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # has_many :dogs_i_like, foreign_key: 'owner_id', dependent: :restrict_with_error
   has_many :dogs, inverse_of: :owner, foreign_key: 'owner_id', dependent: :restrict_with_error, before_add: :restrict_to_twenty_adoptions
   has_many :recent_adoptions, -> {where('dogs.created_at > ?', 1.hour.ago)}, class_name: 'Dog', foreign_key: 'owner_id'
-  accepts_nested_attributes_for :dogs, allow_destroy: true
+  accepts_nested_attributes_for :dogs, allow_destroy: true, reject_if: :all_blank
 
   scope :old, -> {where('age > 50')}
 
@@ -29,7 +29,7 @@ class User < ApplicationRecord
                                   too_long: 'You are too old now. Have you thought about moving to Florida?'
                                 }
 
-  validates :authorized, acceptance: true# { accept: 'yes'}
+  validates :authorized, acceptance: true, on: :create # { accept: 'yes'}
 
   # validates :email, confirmation: {case_sensative: false}, on: :create
   validates :email, presence: true,
