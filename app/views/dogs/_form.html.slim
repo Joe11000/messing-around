@@ -6,6 +6,10 @@
         - @dog.errors.full_messages.each do |message|
           li = message
 
+  .field.form-group
+    = f.label :avatar
+    = f.file_field :avatar
+
   .field
     = f.label :name
     = f.text_field :name

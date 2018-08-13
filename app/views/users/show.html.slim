@@ -1,6 +1,15 @@
 p#notice = notice
 
 p
+  = image_tag @user.avatar.full_path
+p
+  strong Security Clearance
+  =< @user.security_clearance
+p
+  strong Name:
+  =< @user.name
+
+p
   strong Email:
   =< @user.email
 p
@@ -15,6 +24,11 @@ p
 p
   strong Birthday:
   =< @user.birthday
+
+p
+  strong Dogs:
+  =< @user.dogs_count
+
 
 => link_to 'Edit', edit_user_path(@user)
 '|

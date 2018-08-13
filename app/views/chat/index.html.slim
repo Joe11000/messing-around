@@ -1,0 +1,8 @@
+h2 Chatroom
+.chatroom
+  = render @messages
+br
+= form_for :message do |f|
+  = f.text_area :body, size: '25x10'
+  br
+  = f.submit :submit

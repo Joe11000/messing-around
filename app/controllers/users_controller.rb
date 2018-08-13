@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       # :location
       # :status
       # :formats
-    @users = User.all
+    @users = User.order(name: :asc)
     # redirect_to (new_force_user_path )
     # redirect_to (force_user_path ForceUser.first)
     # render plain: "What is going on here"
@@ -47,13 +47,12 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     # @user = User.includes(:dogs).find_by(user: user_params[:id])
-
+    @all_dogs = Dog.order(:owner_id, :name)
   end
 
   # POST /users
   # POST /users.json
   def create
-    byebug
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
@@ -70,19 +69,23 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    1 + 1
-    byebug
-    dog_ids_to_associate_with_user = params[:user]['dog_ids'][1..-1]
-    set_user.dogs << Dog.find(dog_ids_to_associate_with_user)
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, alert: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    # ActiveRecord::Base.transaction do
+      set_user.dog_ids_to_associate_with_user params[:user]['dog_ids'][1..-1].map(&:to_i)
+
+      @user.reload
+      byebug
+      @user.reload.avatar.attach user_params[:avatar]
+
+      respond_to do |format|
+        if @user.reload.update(user_params)
+          format.html { redirect_to @user, alert: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    # end
   end
 
   # DELETE /users/1
@@ -98,12 +101,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
-      # @current_user
+      @user ||= User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:favorite_numbers, :age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, dog_ids: [])
+      params.require(:user).permit(:avatar, :age, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, dog_ids: [])
     end
 end

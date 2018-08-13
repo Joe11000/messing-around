@@ -71,3 +71,5 @@ gem 'slim-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'simplecov'
 # gem 'devise'
+
+gem "aws-sdk-s3", require: false

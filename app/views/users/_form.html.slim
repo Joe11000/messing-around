@@ -12,6 +12,13 @@
     .field.form-control
       = f.label :age, 'Age'
       = f.text_field :age, required: true, title: 'Age must be an integer', pattern: '\d+',  data: {confirm: 'are you sure this is your real age?'}
+
+
+  .clearfix
+  .form-group.col-lg-4.col-offset-2
+    = f.label :avatar, 'User photo'
+    = f.file_field :avatar
+
   .clearfix
   .form-group.col-lg-4.col-offset-2
     .field.form-control
@@ -51,15 +58,15 @@
   .clearfix
   .form-group.col-lg-4.col-offset-2
     .field.form-control
-      = f.collection_check_boxes :dog_ids, Dog.all, :id, :name
+      = f.collection_check_boxes :dog_ids, @all_dogs, :id, :avatar do |ff|
+        - byebug
+        = image_tag b.url
 
   .clearfix
   .form-group.col-lg-4.col-offset-2
     = f.time_zone_select :birthday
 
-  / .clearfix
-  / .form-group.col-lg-4.col-offset-2
-  /   / = f.fields_for @user.photoes
+
   /   input type='text' name='user[favorite_numbers][]' value=("what".upcase) data-id=("user_#{@user.id}_favorite_numbers")
   /   <input type='text' name='user[favorite_numbers][]'/>
   /   <input type='text' name='user[favorite_numbers][]'/>
@@ -70,12 +77,3 @@
   .clearfix
   .form-group
     #submit.actions.btn.btn-info = f.submit 'Submit', data: { disable_with: 'Doing the deed...' }
-
-
-
-
-
-
-
-
-

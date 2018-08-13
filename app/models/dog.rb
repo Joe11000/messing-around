@@ -1,5 +1,5 @@
 class Dog < ApplicationRecord
-
+  has_one_attached :avatar
   acts_as_paranoid
   has_many :pictures, as: :imageable
 
