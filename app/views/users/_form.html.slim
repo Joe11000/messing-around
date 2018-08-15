@@ -8,62 +8,73 @@
       - @user.errors.full_messages.each do |message|
         li = message
 = form_with model: @user, local: true do |f|
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.label :age, 'Age'
       = f.text_field :age, required: true, title: 'Age must be an integer', pattern: '\d+',  data: {confirm: 'are you sure this is your real age?'}
 
 
+  - if @user.avatar.attached?
+    .clearfix
+    .form-group.col-lg-6.col-offset-2
+      / = image_tag url_for(@user.avatar)
+      = image_tag @user.avatar
+
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     = f.label :avatar, 'User photo'
     = f.file_field :avatar
 
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.label :email
       = f.text_field :email, required: true, title: 'Please enter a valid email address', pattern: ".+@.+\.com"
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.search_field :email
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.hidden_field  :portugal, value: 'opus day'
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.select :sexuality, (User.sexualities.map { |sex, int_val| [sex.titleize, sex] }).insert(0, '')
   .clearfix
-  .form-group.col-lg-4.col-offset-2.whatsup
+  .form-group.col-lg-6.col-offset-2.whatsup
     .field.form-control
       = f.label :birthday
       = f.datetime_select :birthday, start_year: 1920, end_year: 2010
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.label :password
       = f.text_field :password, required: true
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.label :password_confirmation
       = f.text_field :password_confirmation, required: true
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
       = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false, required: true
       = f.check_box :authorized
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     .field.form-control
-      = f.collection_check_boxes :dog_ids, @all_dogs, :id, :avatar do |ff|
-        - byebug
-        = image_tag b.url
+      / = f.collection_check_boxes :dog_ids, @all_dogs, :id, :name
+      - @all_dogs.each do |dog|
+        - if dog.avatar.attached?
+          = image_tag dog.avatar.variant(resize_to_fit: [100,100])
+        => f.check_box :name
+        = f.label :name, dog.name
+        br
+
 
   .clearfix
-  .form-group.col-lg-4.col-offset-2
+  .form-group.col-lg-6.col-offset-2
     = f.time_zone_select :birthday
 
 
