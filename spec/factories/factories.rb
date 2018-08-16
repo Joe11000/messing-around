@@ -6,7 +6,6 @@ FactoryBot.define do
     sequence(:name) {|n| Faker::Name.first_name + n.to_s }
 
     sequence(:email) {|n| name + n.to_s + '@gmail.com'}
-    sequence(:age) { (rand (1...60)).round(2) }
 
     sexuality {User.sexualities.keys.sample}
     birthday { ( Time.now - rand(Time.now.to_i) ) }
@@ -37,7 +36,6 @@ FactoryBot.define do
   factory :dog do
     sequence(:name) {|n| Faker::Dog.name + n.to_s }
     association :owner, factory: :user
-    sequence(:age) { (rand (1...15)).round(2) }
   end
 
   factory :toy do

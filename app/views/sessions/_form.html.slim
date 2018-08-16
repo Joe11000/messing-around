@@ -1,15 +1,15 @@
-= form_for @session do |f|
-  - if @session.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@session.errors.count, "error")} prohibited this session from being saved:"
-      ul
-        - @session.errors.full_messages.each do |message|
-          li = message
+/ = form_with url: sessions_path, scope: :session do |f|
+/   - if @session.errors.any?
+/     #error_explanation
+/       h2 = "#{pluralize(@session.errors.count, "error")} prohibited this session from being saved:"
+/       ul
+/         - @session.errors.full_messages.each do |message|
+/           li = message
 
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :password
-    = f.password_field :password
-  .actions = f.submit
+/   .field
+/     = f.label :email
+/     = f.text_field :email, require: true, value: User.first.email
+/   .field
+/     = f.label :password, require: true, value: User.first.password
+/     = f.password_field  :password
+/   .actions = f.submit

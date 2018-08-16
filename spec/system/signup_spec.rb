@@ -17,7 +17,6 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         expect(page.current_path).to eq new_user_path
 
         within :css, 'form#user-form' do
-          fill_in "user[age]", with: joe[:age]
           fill_in "user[email]", with: joe[:email]
           select joe[:sexuality].titleize, from: 'user[sexuality]'
           fill_in "user[password]", with: example_password
@@ -40,7 +39,6 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         expect(page.current_path).to eq new_user_path
 
         within :css, 'form#user-form' do
-          fill_in "user[age]", with: joe[:age]
           fill_in "user[email]", with: joe[:email]
           select joe[:sexuality].titleize, from: 'user[sexuality]'
           fill_in "user[password]", with: example_password

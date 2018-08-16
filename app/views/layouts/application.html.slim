@@ -8,8 +8,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    - if @current_user
-      p = @current_user.name
+    - byebug
+    - if current_user
+      p = current_user.name
+        = link_to "Log Out", url_options: {method: :delete, url: session_path(current_user.id)}, html_options: {data: {confirm: 'Are you sure?', disable_with: 'logging you out'}}
     - else
       p
         a href=(root_url) title='Why?' Sign up Here

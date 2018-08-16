@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # has_many :dogs_i_like, foreign_key: 'owner_id', dependent: :restrict_with_error
   has_many :dogs, inverse_of: :owner, foreign_key: 'owner_id', dependent: :restrict_with_error, before_add: :restrict_to_twenty_adoptions
   has_many :recent_adoptions, -> {where('dogs.created_at > ?', 1.hour.ago)}, class_name: 'Dog', foreign_key: 'owner_id'
-  accepts_nested_attributes_for :dogs, allow_destroy: true, reject_if: proc {|dog_entry| byebug; dog_entry.blank?}
+  accepts_nested_attributes_for :dogs, allow_destroy: true, reject_if: proc {|dog_entry|  dog_entry.blank?}
 
   scope :old, -> {where('age > 50')}
 
@@ -22,20 +22,21 @@ class User < ApplicationRecord
   enum sexuality: ['straight', 'bi', 'gay', 'trans']
   enum security_clearance: ['user', 'admin']
   # validates :age, :sexuality, desireable: true
-  validates :age, presence: true,
-                  numericality: {
-                                  only_integer: true,
-                                  maximum: 60,
-                                  greater_than_or_equal_to: 1,
-                                  message: "number must be larger than 0",
-                                  too_long: 'You are too old now. Have you thought about moving to Florida?'
-                                }
+
+  # validates :age, presence: true,
+  #                 numericality: {
+  #                                 only_integer: true,
+  #                                 maximum: 60,
+  #                                 greater_than_or_equal_to: 1,
+  #                                 message: "number must be larger than 0",
+  #                                 too_long: 'You are too old now. Have you thought about moving to Florida?'
+  #                               }
 
   validates :authorized, acceptance: true, on: :create # { accept: 'yes'}
 
   # validates :email, confirmation: {case_sensative: false}, on: :create
   validates :email, presence: true,
-                    format: { with: /\A.*@.*\.com\z/, message: "only allows letters" }
+                    format: { with: /\A.*@.*\.com\z/, message: "incorrect format" }
 
   validates :sexuality, inclusion: { in: User.sexualities.keys }
   validates :email, :age, presence: true
@@ -83,8 +84,9 @@ class User < ApplicationRecord
       self.dogs << Dog.find(_dog_ids_to_associate_with_user)
     end
   end
+
+  def age
+    byebug
+    ((Date.today - birthday) / 365).floor
+  end
 end
-
-
-
-

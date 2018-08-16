@@ -1,12 +1,17 @@
 class SessionsController < ApplicationController
+
+  # def new
+  #   @session = User.new
+  # end
+
   # POST /sessions
   # POST /sessions.json
   def create
-    byebug
     @user = User.find_by_email(session_params[:email])
 
     respond_to do |format|
-      if @user.validate session_params[:password]
+
+      if @user.authenticate session_params[:password]
         session[:user_id] = @user.id
         format.html { redirect_to @user, notice: "Successfully Logged in as #{@user.email}." }
         format.json { render :show, status: :created, location: @session }

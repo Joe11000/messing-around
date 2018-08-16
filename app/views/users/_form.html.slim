@@ -16,9 +16,10 @@
 
   - if @user.avatar.attached?
     .clearfix
-    .form-group.col-lg-6.col-offset-2
+    #user-avatar.form-group.col-lg-6.col-offset-2
       / = image_tag url_for(@user.avatar)
-      = image_tag @user.avatar
+      / = image_tag @user.avatar, size: '200x200'
+      = image_tag @user.avatar.variant(resize_to_fit: [100, 100])
 
   .clearfix
   .form-group.col-lg-6.col-offset-2
@@ -61,16 +62,18 @@
     .field.form-control
       = f.label :authorized, 'authorized?', checked_value: true, unchecked_value: false, required: true
       = f.check_box :authorized
-  .clearfix
-  .form-group.col-lg-6.col-offset-2
-    .field.form-control
-      / = f.collection_check_boxes :dog_ids, @all_dogs, :id, :name
-      - @all_dogs.each do |dog|
-        - if dog.avatar.attached?
-          = image_tag dog.avatar.variant(resize_to_fit: [100,100])
-        => f.check_box :name
-        = f.label :name, dog.name
-        br
+
+  - unless local_assigns[:all_dogs].nil?
+    .clearfix
+    #locally_assigned.form-group.col-lg-6.col-offset-2
+      .field.form-control
+        / = f.collection_check_boxes :dog_ids, @all_dogs, :id, :name
+        - local_assigns[:all_dogs].each do |dog|
+          - if dog.avatar.attached?
+            = image_tag dog.avatar.variant(resize_to_fit: [100,100])
+          => f.check_box :name
+          = f.label :name, dog.name
+          br
 
 
   .clearfix
