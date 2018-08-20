@@ -29,5 +29,7 @@ module RailsGuides
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
   end
 end
+    # config.active_storage.variant_processor = :vips

@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def default_url_options
+    { god: 'kathulu' }
+  end
+
   layout 'application'
   before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :create, :index]
   before_action :set_user, only: [:show, :update, :destroy, :edit]

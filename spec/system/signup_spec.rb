@@ -26,7 +26,6 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         end
 
         expect(page.current_path).to match /users\/#{User.last.id}/
-        expect(page).to have_content joe[:age]
         expect(page).to have_content joe[:email]
         expect(page).to have_content joe[:sexuality]
       end
@@ -48,7 +47,6 @@ RSpec.describe 'The User Sign Up Process', type: :system do
         end
 
         expect(page.current_path).to match /users\/#{User.last.id}/
-        expect(page).to have_content joe[:age]
         expect(page).to have_content joe[:email]
         expect(page).to have_content joe[:sexuality]
 

@@ -4,7 +4,6 @@ RSpec.describe "dogs/edit", type: :view do
   before(:each) do
     @dog = assign(:dog, Dog.create!(
       :name => "MyString",
-      :age => 1,
       :owner => nil
     ))
   end
@@ -15,8 +14,6 @@ RSpec.describe "dogs/edit", type: :view do
     assert_select "form[action=?][method=?]", dog_path(@dog), "post" do
 
       assert_select "input[name=?]", "dog[name]"
-
-      assert_select "input[name=?]", "dog[age]"
 
       assert_select "input[name=?]", "dog[owner_id]"
     end

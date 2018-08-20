@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resources :adoption
   # root 'users#index'
-  root 'sessions#new'
+  root 'users#new'
 
   mount ActionCable.server => '/cable'
 end

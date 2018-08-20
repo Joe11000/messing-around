@@ -86,7 +86,6 @@ class User < ApplicationRecord
   end
 
   def age
-    byebug
-    ((Date.today - birthday) / 365).floor
+    ((Date.today - birthday) / 365).floor.to_i
   end
 end

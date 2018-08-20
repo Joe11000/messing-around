@@ -4,7 +4,6 @@ RSpec.describe "dogs/new", type: :view do
   before(:each) do
     assign(:dog, Dog.new(
       :name => "MyString",
-      :age => 1,
       :owner => nil
     ))
   end

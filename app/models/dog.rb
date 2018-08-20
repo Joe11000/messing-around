@@ -3,7 +3,6 @@ class Dog < ApplicationRecord
   acts_as_paranoid
   has_many :pictures, as: :imageable
 
-  scope :puppies, ->{ where('age < 4') }
   scope :adopted, -> { where('owner_id > 0') }
   scope :not_adopted, -> { where('owner_id IS NULL') }
 
