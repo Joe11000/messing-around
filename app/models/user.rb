@@ -88,4 +88,8 @@ class User < ApplicationRecord
   def age
     ((Date.today - birthday) / 365).floor.to_i
   end
+
+  def user_not_authorized
+
+  end
 end

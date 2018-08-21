@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
-  def default_url_options
-    { god: 'kathulu' }
-  end
+  # rescue_from User::NotAuthorized, with: :user_not_authorized
+  # force_ssl
 
   layout 'application'
-  before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :create, :index]
+  # before_action -> { redirect_to(new_user_path) unless logged_in? }, except: [:new, :create, :index]
   before_action :set_user, only: [:show, :update, :destroy, :edit]
 
   # GET /users
   # GET /users.json
   def index
+    byebug
         # render options
       # :content_type
       # :layout
@@ -40,11 +40,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    byebug
   end
 
   # GET /users/new
   def new
-    byebug
     @user = User.new
   end
 
@@ -101,6 +101,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def error
+    raise User::NotAuthorized
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -111,4 +115,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:avatar, :authorized, :birthday, :email, :name, :password, :password_confirmation, :sexuality, dog_ids: [])
     end
+
+    def user_not_authorized
+      flash[:alert] = 'User is not allowed to access this section'
+      redirect_to users_path
+    end
+    # permitted scalar values =>  String, Symbol, NilClass, Numeric, TrueClass, FalseClass, Date, Time, DateTime, StringIO, IO, ActionDispatch::Http::UploadedFile, and Rack::Test::UploadedFile.
 end
