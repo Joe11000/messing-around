@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get '/stories/:id' => redirect("/users/%{id}", status: 302)
 
 
+get '/bears' => 'users#bears'
 
 # created own url helpers
 direct :da_bears do
@@ -51,7 +52,7 @@ end
     # get 'preview', on: :collection
 # end
 
-
+# The namespace scope will automatically add :as as well as :module and :path prefixes.
 # namespace 'admin' do
 #   resource :photos
 # end

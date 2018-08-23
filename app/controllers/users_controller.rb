@@ -105,6 +105,10 @@ class UsersController < ApplicationController
     raise User::NotAuthorized
   end
 
+  def bears
+    redirect_to(da_bears_url, status: 302) and return
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

@@ -43,11 +43,11 @@ FactoryBot.define do
     fun_level {rand(0..10)}
 
     factory :squeeky_toy do
-      type 'SqueekyToy'
+      type { 'SqueekyToy' }
     end
 
     factory :fetch_toy do
-      type 'FetchToy'
+      type { 'FetchToy' }
     end
   end
 end
