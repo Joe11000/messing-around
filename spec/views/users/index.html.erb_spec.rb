@@ -6,7 +6,6 @@ RSpec.describe "users/index", type: :view do
   end
 
   it "renders a list of users" do
-    byebug
     render
 
   end

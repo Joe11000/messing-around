@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    byebug
         # render options
       # :content_type
       # :layout
@@ -17,10 +16,11 @@ class UsersController < ApplicationController
       # :status
       # :formats
     @users = User.order(name: :asc)
+    byebug
     # redirect_to (new_force_user_path )
     # redirect_to (force_user_path ForceUser.first)
     # render plain: "What is going on here"
-    # render inline: "What is going on here #{Jedi.pluck(:name).join(", ")}?"
+    # render inline: "What is going on here #{User.pluck(:name).join(", ")}?"
     # render 'new'
     # render file: '/Users/joe/Dropbox/coding/coding/ruby/rails/wip/rails5/sith_lineage/app/views/force_users/index.html.slim', layout: false
     # render template: 'force_users/index.json.jbuilder'
@@ -40,7 +40,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    byebug
   end
 
   # GET /users/new
@@ -50,6 +49,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    byebug
+
     # @user = User.includes(:dogs).find_by(user: user_params[:id])
     @all_dogs = Dog.order(:owner_id, :name)
   end
@@ -73,7 +74,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-      byebug
       # params_dog_ids = params[:user]['dog_ids'][1..-1].map(&:to_i)
       # set_user.dog_ids_to_associate_with_user(params_dog_ids) unless params_dog_ids.blank?
       # Rails.logger.info "What are you the way you are?"
@@ -122,3 +122,6 @@ class UsersController < ApplicationController
     end
     # permitted scalar values =>  String, Symbol, NilClass, Numeric, TrueClass, FalseClass, Date, Time, DateTime, StringIO, IO, ActionDispatch::Http::UploadedFile, and Rack::Test::UploadedFile.
 end
+
+
+

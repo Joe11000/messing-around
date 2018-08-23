@@ -1,18 +1,20 @@
 - content_for :head
   = stylesheet_link_tag 'users'
 
+= link_to 'Destroy User', User.first, method: :delete, data: {confirm: 'you sure about that?'}
+
 - if @user.errors.any?
   #error_explanation
     h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
     ul
       - @user.errors.full_messages.each do |message|
         li = message
-= form_with model: @user, local: true do |f|
+= form_with model: @user, local: true, id: 'user-form' do |f|
   - if @user.avatar.attached?
     .clearfix
     #user-avatar.form-group.col-lg-6.col-offset-2
       / = image_tag url_for(@user.avatar)
-      = image_tag @user.avatar.variant(resize: "700x700", flop: true).processed.service_url
+      = image_tag @user.avatar.variant(resize: "700x700", flop: true)
       /= image_tag @user.avatar.variant(resize: "100x100", monochrome: true, rotate: "-90").processed.service_url
 
 

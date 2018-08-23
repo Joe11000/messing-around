@@ -2,7 +2,7 @@ p#notice = notice
 
 - if @user.avatar.attached?
   p
-    = image_tag @user.avatar.variant(resize: "100x100", flip: true).processed.service_url
+    = image_tag @user.avatar.variant(resize: "100x100", flip: true)
 
 p
   strong Security Clearance

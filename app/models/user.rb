@@ -66,7 +66,6 @@ class User < ApplicationRecord
   end
 
   def restrict_to_twenty_adoptions what
-    byebug
     raise if dogs.count >= 20
   end
 
