@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 # end
 # resources :users, demigod: 'Achillies', constraints: BlacklistConstraint.new
 
+concern :imageable do
+  resources :images, only: :index
+end
 
 defaults god: :kathulu do
-  # scope :admin do
     constraints ({id: /\d+/, remote_ip: /127.0.0.1/ }) do
       resources :chat, only: [:index]
       # resources :users, demigod: 'Achillies', constraints: {remote_ip: /127.0.0.1/}
@@ -22,9 +24,16 @@ defaults god: :kathulu do
       resources :dogs
       resources :sessions, only: [:create, :destroy]
       resources :adoption
+
+      concerns :imageable
     end
-  # end
 end
+
+  scope :admin do
+    concerns :imageable
+  end
+    # concerns :imageable
+
   get '/users/error' => 'users#error'
   # root 'users#index'
   root 'users#new'
@@ -37,14 +46,14 @@ end
 
   get '/bears' => 'users#bears'
 
-# created own url helpers
-direct :da_bears do
-  "http://www.chicagobears.com"
-end
+  # created own url helpers
+  direct :da_bears do
+    "http://www.chicagobears.com"
+  end
 
-direct :puppers do
-  { controller: 'dogs', action: 'index', subdomain: 'www'}
-end
+  direct :puppers do
+    { controller: 'dogs', action: 'index', subdomain: 'www'}
+  end
 
 
 # German path_names
@@ -68,7 +77,7 @@ end
 #   member do
 #     get 'preview'
 #   end
-    # get 'preview', on: :collection
+#     get 'preview', on: :collection
 # end
 
 # The namespace scope will automatically add :as as well as :module and :path prefixes.
@@ -100,6 +109,9 @@ get 'photos/:id', to: 'photos#show', constraints: { id: /[A-Z]\d{5}/ }
 
   mount ActionCable.server => '/cable'
 
+
+
+  resources :hands, except: :destroy, defaults: {size: 'large'}, constraints: { remote_ip: /127.0.0.1/, id: /\d+/}
 
 end
 

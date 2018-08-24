@@ -7,6 +7,8 @@ RSpec.describe 'routes created by me', type: :routing do
         # expect(get: da_bears_path).to be_routable
         expect(get: da_bears_path).to redirect_to('http://www.chicagobears.com')
       end
+
+
     end
   end
 end
