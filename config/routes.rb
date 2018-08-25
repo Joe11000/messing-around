@@ -12,21 +12,21 @@ Rails.application.routes.draw do
 # resources :users, demigod: 'Achillies', constraints: BlacklistConstraint.new
 
 concern :imageable do
-  resources :images, only: :index
+  resources :images, only: :index, controller: :users, as: :user
 end
 
 defaults god: :kathulu do
-    constraints ({id: /\d+/, remote_ip: /127.0.0.1/ }) do
-      resources :chat, only: [:index]
-      # resources :users, demigod: 'Achillies', constraints: {remote_ip: /127.0.0.1/}
-      # resources :users, demigod: 'Achillies', defaults: {god: 'Kathulu'}, constraints: lambda { |req| !!(req.remote_ip.match '127.0.0.1') if Rails.env == 'development'}
-      resources :users, demigod: 'Achillies', constraints: lambda { |req| !!(req.remote_ip.match '127.0.0.1') if Rails.env == 'development'}
-      resources :dogs
-      resources :sessions, only: [:create, :destroy]
-      resources :adoption
+  constraints ({id: /\d+/, remote_ip: /127.0.0.1/ }) do
+    resources :chat, only: [:index]
+    # resources :users, demigod: 'Achillies', constraints: {remote_ip: /127.0.0.1/}
+    # resources :users, demigod: 'Achillies', defaults: {god: 'Kathulu'}, constraints: lambda { |req| !!(req.remote_ip.match '127.0.0.1') if Rails.env == 'development'}
+    resources :users, demigod: 'Achillies', constraints: lambda { |req| !!(req.remote_ip.match '127.0.0.1') if Rails.env == 'development'}
+    resources :dogs
+    resources :sessions, only: [:create, :destroy]
+    resources :adoption
 
-      concerns :imageable
-    end
+    concerns :imageable
+  end
 end
 
   scope :admin do

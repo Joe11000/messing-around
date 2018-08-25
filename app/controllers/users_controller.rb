@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       # :status
       # :formats
     @users = User.order(name: :asc)
-    byebug
+    # byebug
     # redirect_to (new_force_user_path )
     # redirect_to (force_user_path ForceUser.first)
     # render plain: "What is going on here"
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    byebug
 
     # @user = User.includes(:dogs).find_by(user: user_params[:id])
     @all_dogs = Dog.order(:owner_id, :name)
@@ -74,6 +73,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    byebug
       # params_dog_ids = params[:user]['dog_ids'][1..-1].map(&:to_i)
       # set_user.dog_ids_to_associate_with_user(params_dog_ids) unless params_dog_ids.blank?
       # Rails.logger.info "What are you the way you are?"
