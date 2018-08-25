@@ -8,6 +8,12 @@ class UserMailer < ApplicationMailer
     @recipients = 'jgnoonan27@gmail.com' # or ['jgnoonan27@gmail.com', 'jgnoonan27@gmail.com'] or User.pluck :email
     mail(to: 'jgnoonan27@gmail.com', subject: 'See what the bears are up to.', cc: '', bcc: '')
   end
+
+  def multiple_welcome_emails
+    params[:users].each do |user|
+      UserMailer.welcome_email.with(user: user)
+    end
+  end
 end
 
 # ActionMailer methods

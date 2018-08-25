@@ -59,4 +59,20 @@ Rails.application.configure do
 
 config.active_storage.service = :local
   # config.active_storage.service = :amazon
+
+
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+
+
+
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'example.com',
+  user_name:            '<username>',
+  password:             '<password>',
+  authentication:       'plain',
+  enable_starttls_auto: true }
+
 end

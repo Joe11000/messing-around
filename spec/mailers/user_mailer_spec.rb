@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe UserMailer, type: :mailer do
 
   before(:each) do
-    ActionMailer::Base.delivery_method = :test
-    ActionMailer::Base.perform_deliveries = true
+    # ActionMailer::Base.delivery_method = :test
+    # ActionMailer::Base.perform_deliveries = true
     ActionMailer::Base.deliveries = []
     @recipient = FactoryBot.create :user
     @mail = UserMailer.with(user: @recipient).welcome_email.deliver
@@ -15,6 +15,9 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe 'notify' do
+    it 'sends out the emails' do
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+    end
 
     it 'renders the headers' do
       expect(@mail.subject).to eq 'See what the bears are up to.'
@@ -44,10 +47,6 @@ RSpec.describe UserMailer, type: :mailer do
                                         )
 
       end
-    end
-
-    it 'should be sent' do
-      ActionMailer::Base.deliveries.count.should == 1
     end
   end
 end
