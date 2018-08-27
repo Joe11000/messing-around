@@ -30,6 +30,9 @@ module RailsGuides
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.active_job.queue_name_prefix = Rails.env
+    # config.active_job.queue_adapter = :sidekiq
+
   end
 end
     # config.active_storage.variant_processor = :vips

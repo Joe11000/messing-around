@@ -8,6 +8,9 @@ RSpec.describe UserMailer, type: :mailer do
     ActionMailer::Base.deliveries = []
     @recipient = FactoryBot.create :user
     @mail = UserMailer.with(user: @recipient).welcome_email.deliver
+    @later_mail = UserMailer.with(user: @recipient).welcome_email.deliver_later
+    @now_mail = UserMailer.with(user: @recipient).welcome_email.deliver_now
+    byebug
   end
 
   after :each do

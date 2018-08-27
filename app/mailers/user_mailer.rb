@@ -1,19 +1,16 @@
 class UserMailer < ApplicationMailer
   default from: 'jgnoonan27@gmail.com'
-  layout 'mailer'
+  # layout 'mailer'
 
   def welcome_email
     @user = params[:user]
     @url = da_bears_url
-    @recipients = 'jgnoonan27@gmail.com' # or ['jgnoonan27@gmail.com', 'jgnoonan27@gmail.com'] or User.pluck :email
-    mail(to: 'jgnoonan27@gmail.com', subject: 'See what the bears are up to.', cc: '', bcc: '')
+    recipients = 'jgnoonan27@gmail.com' # or ['jgnoonan27@gmail.com', 'jgnoonan27@gmail.com'] or User.pluck :email
+    mail(to: recipients, subject: 'See what the bears are up to.', cc: ['jgnoonan27+cc@gmail.com'], bcc: ['jgnoonan27+bcc@gmail.com']) #do |format|
+      # format.html { render layout: 'user_mailer'}
+    # end
   end
 
-  def multiple_welcome_emails
-    params[:users].each do |user|
-      UserMailer.welcome_email.with(user: user)
-    end
-  end
 end
 
 # ActionMailer methods
