@@ -38,7 +38,7 @@ class User < ApplicationRecord
   validates :email, presence: true,
                     format: { with: /\A.*@.*\.com\z/, message: "incorrect format" }
 
-  validates :sexuality, inclusion: { in: User.sexualities.keys }
+  validates :sexuality, inclusion: { in: self.sexualities.keys }
   validates :email, :age, presence: true
 
   # validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
@@ -88,7 +88,7 @@ class User < ApplicationRecord
     ((Date.today - birthday) / 365).floor.to_i
   end
 
-  def user_not_authorized
-
+  def send_welcome_email job=MailWelcomeEmailsJob
+    job.perform_later(self)
   end
 end

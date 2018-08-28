@@ -16,7 +16,7 @@ class MailWelcomeEmailsJob < ApplicationJob
 
   private
     def run_mailer user
-      UserMailer.with(user: user).welcome_email.deliver_later(wait_until: 2.seconds.from_now)
+      UserMailer.with(user: user).welcome_email.deliver_later(wait_until: 2.minutes.from_now)
     end
 end
 # MailWelcomeEmailsJob.perform_now(users: User.first)
