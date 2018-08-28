@@ -1,7 +1,7 @@
 class Dog < ApplicationRecord
   has_one_attached :avatar
+  has_many_attached :pictures
   acts_as_paranoid
-  has_many :pictures, as: :imageable
 
   scope :adopted, -> { where('owner_id > 0') }
   scope :not_adopted, -> { where('owner_id IS NULL') }

@@ -1,12 +1,12 @@
 class User < ApplicationRecord
   has_one_attached :avatar
+  has_many_attached :pictures
 #
   self.lock_optimistically = true
 
   has_secure_password
   acts_as_paranoid
 
-  has_many :pictures, as: :imageable
 
   before_save :set_created_at_in_timezone
 

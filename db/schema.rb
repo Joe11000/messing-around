@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_220036) do
+ActiveRecord::Schema.define(version: 2018_08_28_205454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,27 +48,10 @@ ActiveRecord::Schema.define(version: 2018_08_16_220036) do
     t.index ["owner_id"], name: "index_dogs_on_owner_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.string "title"
-    t.string "imageable_type"
-    t.bigint "imageable_id"
-    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
-  end
-
-  create_table "suppliers", force: :cascade do |t|
-  end
-
   create_table "toys", force: :cascade do |t|
     t.string "type"
-    t.integer "fun_level", default: 0
     t.decimal "cost", precision: 10, scale: 2
+    t.integer "fun_level", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "dog_id"
@@ -76,18 +59,18 @@ ActiveRecord::Schema.define(version: 2018_08_16_220036) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.date "birthday", null: false
-    t.integer "counter_cache", default: 0
-    t.datetime "created_at", default: "2018-07-17 23:07:06", null: false
-    t.datetime "deleted_at"
-    t.integer "dogs_count"
     t.string "email"
-    t.integer "lock_version"
-    t.string "name"
-    t.string "password_digest"
     t.integer "sexuality", default: 0
+    t.datetime "created_at", default: "2018-08-28 20:57:25", null: false
+    t.datetime "updated_at", default: "2018-08-28 20:57:25", null: false
+    t.datetime "deleted_at"
+    t.string "password_digest"
+    t.date "birthday", null: false
     t.integer "security_clearance", default: 0
-    t.datetime "updated_at", default: "2018-07-17 23:07:06", null: false
+    t.string "name"
+    t.integer "counter_cache"
+    t.integer "dogs_count"
+    t.integer "lock_version"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
