@@ -58,6 +58,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'rspec-sidekiq'
 end
 
 group :development, :test do

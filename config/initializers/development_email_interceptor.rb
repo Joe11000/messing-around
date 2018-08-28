@@ -1,11 +1,6 @@
-# if Rails.env.development?
-#   byebug
-#   ActionMailer::Base.register_interceptor(DevelopmentEmailInterceptor)
-# end
+require Rails.root.join('lib/dev_email_interceptor')
 
-# class DevelopmentEmailInterceptor
-#   def self.delivering_email(message)
-#     byebug
-#     message.to = ['jgnoonan27+intercepted@gmail.com']
-#   end
-# end
+if Rails.env.development?
+  byebug
+  ActionMailer::Base.register_interceptor(DevelopmentEmailInterceptor)
+end

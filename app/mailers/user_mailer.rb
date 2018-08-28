@@ -1,8 +1,10 @@
 class UserMailer < ApplicationMailer
   default from: 'jgnoonan27@gmail.com'
   # layout 'mailer'
+  # queue_as :urgent
 
   def welcome_email
+    byebug
     @user = params[:user]
     @url = da_bears_url
     recipients = 'jgnoonan27@gmail.com' # or ['jgnoonan27@gmail.com', 'jgnoonan27@gmail.com'] or User.pluck :email
