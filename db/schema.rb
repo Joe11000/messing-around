@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2018_08_28_205454) do
     t.index ["owner_id"], name: "index_dogs_on_owner_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "toys", force: :cascade do |t|
     t.string "type"
     t.decimal "cost", precision: 10, scale: 2
@@ -61,8 +68,8 @@ ActiveRecord::Schema.define(version: 2018_08_28_205454) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.integer "sexuality", default: 0
-    t.datetime "created_at", default: "2018-08-28 20:57:25", null: false
-    t.datetime "updated_at", default: "2018-08-28 20:57:25", null: false
+    t.datetime "created_at", default: "2018-08-28 21:44:32", null: false
+    t.datetime "updated_at", default: "2018-08-28 21:44:32", null: false
     t.datetime "deleted_at"
     t.string "password_digest"
     t.date "birthday", null: false

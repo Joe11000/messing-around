@@ -9,7 +9,7 @@
     ul
       - @user.errors.full_messages.each do |message|
         li = message
-= form_with model: @user, local: true, id: 'user-form' do |f|
+= form_with model: @user, local: true do |f|
   - if @user.avatar.attached?
     .clearfix
     #user-avatar.form-group.col-lg-6.col-offset-2
