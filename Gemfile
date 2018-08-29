@@ -57,7 +57,8 @@ group :test do
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem 'shoulda-matchers'
+  # gem 'shoulda-matchers'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers', ref: '7f070cbab458d4a1a00e9566611f5a94f7704464'
   gem 'rspec-sidekiq'
 end
 

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_one_attached :avatar
   has_many_attached :pictures
-#
+
   self.lock_optimistically = true
 
   has_secure_password
@@ -17,20 +17,21 @@ class User < ApplicationRecord
 
   scope :old, -> {where('age > 50')}
 
+  validates :cash, format: { with: /\A\d{,8}?[.]\d{,2}\z/}
 
   # validates_with ::EmailValidator
   enum sexuality: ['straight', 'bi', 'gay', 'trans']
   enum security_clearance: ['user', 'admin']
   # validates :age, :sexuality, desireable: true
 
-  # validates :age, presence: true,
-  #                 numericality: {
-  #                                 only_integer: true,
-  #                                 maximum: 60,
-  #                                 greater_than_or_equal_to: 1,
-  #                                 message: "number must be larger than 0",
-  #                                 too_long: 'You are too old now. Have you thought about moving to Florida?'
-  #                               }
+  validates :cash, presence: true,
+                  numericality: {
+                                  # only_integer: true,
+                                  less_than: 10_000_000,
+                                  greater_than_or_equal_to: 0.0,
+                                  message: "must be a positive number",
+                                  too_long: 'you can not enter that much money'
+                                }
 
   validates :authorized, acceptance: true, on: :create # { accept: 'yes'}
 
@@ -39,9 +40,9 @@ class User < ApplicationRecord
                     format: { with: /\A.*@.*\.com\z/, message: "incorrect format" }
 
   validates :sexuality, inclusion: { in: self.sexualities.keys }
-  validates :email, :age, presence: true
+  validates :email, :birthday, presence: true
 
-  # validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
+  validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
 
   # def age_confirmation_converter!
   #   age_confirmation = age_confirmation.to_i
