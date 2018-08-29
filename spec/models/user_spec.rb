@@ -29,11 +29,12 @@ RSpec.describe User, type: :model do
 
       context '#created_at'
       context '#deleted_at'
+
       context '#dogs_count' do
         fit 'has the correct amount of dogs associated' do
           user = FactoryBot.create :user
 
-          expect{user.dogs.create (FactoryBot.create :dog) }.to change {user.dogs_count}.from(0).to(1)
+          expect{user.dogs << FactoryBot.create(:dog); user.reload }.to change {user.dogs_count}.from(nil).to(1)
         end
 
       end
@@ -60,21 +61,30 @@ RSpec.describe User, type: :model do
       context '#updated_at'
     end
 
+    context 'methods' do
+      context '#send_welcome_email' do
+        it 'enqueues a welcome email' do
+          user = FactoryBot.build :user
+
+          expect{ user.send_welcome_email }.to change { ActionMailer::Base.deliveries }.by(1)
+        end
+      end
+
+    end
+
     context 'associations' do
       it {is_expected.to accept_nested_attributes_for(:dogs).allow_destroy(true)}
     end
 
     context 'scopes' do
-      context '.old'
-    end
+      context '.old' do
+        it 'only shows users under age 50' do
 
-    context '#send_welcome_email' do
-      it 'enqueues a welcome email' do
-        user = FactoryBot.build :user
-
-        expect{ user.send_welcome_email }.to change { ActionMailer::Base.deliveries }.by(1)
+          expect
+        end
       end
     end
+
   end
 
 
