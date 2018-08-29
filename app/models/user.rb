@@ -51,7 +51,7 @@ class User < ApplicationRecord
 
 
     # validates :email, uniqueness: true
-  validates :password, confirmation: true
+  validates :password, confirmation: true, on: :create
 
   # validates :email, exclusion: {in: ['fu@aol.com'], message: 'dude, come on'}
   # validates :email, format: {with: /$what\?^/, message: 'this pattern works'}
@@ -90,6 +90,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_email job=MailWelcomeEmailsJob
+    byebug
     job.perform_later(self)
   end
 end

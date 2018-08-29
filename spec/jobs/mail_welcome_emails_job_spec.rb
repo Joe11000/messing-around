@@ -11,8 +11,10 @@ RSpec.describe MailWelcomeEmailsJob, type: :job do
       expect(MailWelcomeEmailsJob).to have_been_enqueued
     end
 
-    fit "enques emails to be sent out to a user" do
-      ActiveJob::Base.queue_adapter = :test
+    it { is_expected.to be_processed_in :test_urgent }
+
+    it "enques emails to be sent out to a user" do
+      # ActiveJob::Base.queue_adapter = :test
 
       2.times { FactoryBot.create :user }
 
@@ -20,6 +22,8 @@ RSpec.describe MailWelcomeEmailsJob, type: :job do
 
       expect(MailWelcomeEmailsJob).to have_been_enqueued
       expect(MailWelcomeEmailsJob).to be_processed_in :urgent
+      expect(MailWelcomeEmailsJob).to have_enqueued_sidekiq_job(UserMailer)
+
       # expect(MailWelcomeEmailsJob).to( be_delayed.for(2.seconds) )
     end
 

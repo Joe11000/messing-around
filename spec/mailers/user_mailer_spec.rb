@@ -17,7 +17,7 @@ RSpec.describe UserMailer, type: :mailer do
     ActionMailer::Base.deliveries.clear
   end
 
-  describe 'notify' do
+  describe '#welcome_email' do
     it 'sends out the emails' do
       expect(ActionMailer::Base.deliveries.count).to eq 1
     end
