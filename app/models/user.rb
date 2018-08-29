@@ -18,20 +18,20 @@ class User < ApplicationRecord
   scope :old, -> {where('age > 50')}
 
   validates :cash, format: { with: /\A\d{,8}?[.]\d{,2}\z/}
+  # validates :cash, presence: true,
+  #                 numericality: {
+  #                                 # only_integer: true,
+  #                                 less_than: 10_000_000,
+  #                                 greater_than_or_equal_to: 0.0,
+  #                                 message: "must be a positive number",
+  #                                 too_long: 'you can not enter that much money'
+  #                               }
 
   # validates_with ::EmailValidator
   enum sexuality: ['straight', 'bi', 'gay', 'trans']
   enum security_clearance: ['user', 'admin']
   # validates :age, :sexuality, desireable: true
 
-  validates :cash, presence: true,
-                  numericality: {
-                                  # only_integer: true,
-                                  less_than: 10_000_000,
-                                  greater_than_or_equal_to: 0.0,
-                                  message: "must be a positive number",
-                                  too_long: 'you can not enter that much money'
-                                }
 
   validates :authorized, acceptance: true, on: :create # { accept: 'yes'}
 

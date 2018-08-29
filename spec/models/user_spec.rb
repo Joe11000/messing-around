@@ -18,16 +18,21 @@ RSpec.describe User, type: :model do
 
     it {is_expected.to validate_confirmation_of(:password)} #.with_message('Please re-enter your password')}
     it {is_expected.to validate_presence_of(:email)}
+    it 'sexuality'
+    it 'security_clearance'
+
   end
 
-  fit 'locks optimistically' do
+  context 'scopes' do
+    it 'old'
+  end
+  it 'locks optimistically' do
     user = FactoryBot.create :user
-    expect{user.update(name: user.name + 'z')}.to change{user.version}.by(1)
+    expect{user.update(name: user.name + 'z')}.to change{user.lock_version}.by(1)
   end
 
   context 'has correct associations' do
     it {is_expected.to accept_nested_attributes_for(:dogs).allow_destroy(true)}
-
   end
   # it {is_expected.to validate_uniqueness_of(:email).with_message}
 

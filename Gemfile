@@ -51,6 +51,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'rails-erd'
+  gem 'guard-rails'
 end
 
 group :test do
