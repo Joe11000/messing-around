@@ -10,21 +10,32 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_secure_password }
 
   context 'attribute validations' do
-    context 'cash' do
+    context '#authorized' do
+      it {is_expected.to validate_acceptance_of(:authorized).on(:create)}
+    end
+
+    context '#cash' do
       it {is_expected.to allow_value(99_999_999.99).for(:cash)}
       it {is_expected.not_to allow_value(100_000_000.00).for(:cash)}
     end
-    it {is_expected.to validate_acceptance_of(:authorized).on(:create)}
 
-    it {is_expected.to validate_confirmation_of(:password)} #.with_message('Please re-enter your password')}
-    it {is_expected.to validate_presence_of(:email)}
-    it 'sexuality'
-    it 'security_clearance'
+    context '#email' do
+      it {is_expected.to validate_presence_of(:email)}
+      it {is_expected.to validate_uniqueness_of(:email)}
+    end
+
+    context '#password' do
+      it {is_expected.to validate_confirmation_of(:password)} #.with_message('Please re-enter your password')}
+    end
+
+
+    context '#sexuality'
+    context '#security_clearance'
 
   end
 
   context 'scopes' do
-    it 'old'
+    context '.old'
   end
   it 'locks optimistically' do
     user = FactoryBot.create :user
