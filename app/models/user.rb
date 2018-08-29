@@ -42,7 +42,7 @@ class User < ApplicationRecord
   validates :sexuality, inclusion: { in: self.sexualities.keys }
   validates :email, :birthday, presence: true
 
-  validates :email, uniqueness: { scope: :age, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
+  validates :email, uniqueness: { scope: :security_clearance, case_sensative: false, message: Proc.new { |user, data| "#{user.sexuality} people must provide a valid #{data[:attribute]}" } }
 
   # def age_confirmation_converter!
   #   age_confirmation = age_confirmation.to_i
