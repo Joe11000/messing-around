@@ -54,10 +54,13 @@ RSpec.describe User, type: :model do
       end
 
       xcontext '#sexuality' do
-        it { is_expected.to define_enum_for(:sexuality).with_values(%w(straight bi gay trans)) }
+        it { is_expected.to define_enum_for(:sexuality).with_values(%w(straight bi gay trans)).backed_by_column_of_type(:integer) }
       end
 
-      context '#security_clearance'
+      xcontext '#security_clearance' do
+        it {is_expected.to define_enum_for(:security_clearance).with_values(%w(user admin)).backed_by_column_of_type(:integer)}
+      end
+
       context '#updated_at'
     end
 
@@ -85,21 +88,27 @@ RSpec.describe User, type: :model do
 
     xcontext 'associations' do
       it { is_expected.to accept_nested_attributes_for(:dogs).allow_destroy(true) }
-      it { is_expected.to have_many(:dogs) }
-      it { is_expected.to have_many(:pictures) }
-      it { is_expected.to have_one(:avatar) }
-      it { is_expected.to have_many(:recent_adoptions) }
+      it { is_expected.to have_many(:dogs).foreign_key(:owner_id) }
 
-    end
-
-    context 'scopes' do
-      context '.old' do
-        it 'only shows users under age 50' do
-
-          # expect
-        end
+      context 'active_storage' do
+        it { is_expected.to have_many(:pictures) }
+        it { is_expected.to have_one(:avatar) }
       end
+
+      context '#recent_adoptions' do
+        it { is_expected.to have_many(:recent_adoptions).conditions('birthday > ?', 50.years.ago ).order(name: :asc) }
+      end
+
     end
+
+    # context 'scopes' do
+      # context '.old' do
+        # it 'only shows users under age 50' do
+
+        #   # expect
+        # end
+      # end
+    # end
 
   end
 

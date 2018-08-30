@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :recent_adoptions, -> {where('dogs.created_at > ?', 1.hour.ago)}, class_name: 'Dog', foreign_key: 'owner_id'
   accepts_nested_attributes_for :dogs, allow_destroy: true, reject_if: proc {|dog_entry|  dog_entry.blank?}
 
-  scope :old, -> {where('birthday > ?', 50.years.ago)}
+  scope :old, -> {where('birthday > ?', 50.years.ago).order('name asc')}
 
   validates :cash, format: { with: /\A\d{,8}?[.]\d{,2}\z/}
   # validates :cash, presence: true,
