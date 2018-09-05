@@ -37,6 +37,8 @@ RSpec.describe User, type: :model do
     t.integer "sexuality", default: 0
     t.integer "security_clearance", default: 0
     t.datetime "updated_at", default: "2018-08-28 21:44:32", null: false
+
+    it { is_expected.to have_db_index(:deleted_at) }
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
 
   end

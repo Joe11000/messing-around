@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       # :location
       # :status
       # :formats
+      byebug
     @users = User.order(name: :asc)
     # byebug
     # redirect_to (new_force_user_path )

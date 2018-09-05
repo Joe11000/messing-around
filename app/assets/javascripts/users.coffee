@@ -2,7 +2,9 @@
 // All this logic will automatically be available in application.js.
 
 // $(function() {
-  document.querySelectorAll('td')[0].style.color = 'green'
-  $('td').css('color' , 'green')
+//  document.querySelectorAll('td')[0].style.color = 'green'
+//  $('td').css('color' , 'green')
 
 // });
+
+App.cable.subscriptions.create { channel: "ChatChannel", room: "Best Room" }

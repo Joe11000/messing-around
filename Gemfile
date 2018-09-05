@@ -61,6 +61,7 @@ group :test do
   # gem 'shoulda-matchers'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers', ref: '7f070cbab458d4a1a00e9566611f5a94f7704464'
   gem 'rspec-sidekiq'
+  gem 'sidekiq'
 end
 
 group :development, :test do
@@ -79,3 +80,29 @@ gem "aws-sdk-s3", require: false
 gem 'image_processing', '~> 1.2'
 
 gem 'bullet'
+gem 'coffee-rails'
+
+
+
+
+# feature testing
+group :test do
+  gem 'capybara', group: :test
+  gem 'chromedriver-helper', group: :test
+  gem 'selenium-webdriver', group: :test
+end
+
+# visualize models
+gem 'rails-erd'
+
+# active storage amazaon s3 cloud image storage
+gem "aws-sdk-s3", require: false
+
+# active storage image processing
+gem 'image_processing', '~> 1.2'
+
+gem 'bullet'
+
+# Background Jobs
+gem 'sidekiq'
+gem 'rspec-sidekiq', group: :test

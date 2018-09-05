@@ -1,6 +1,8 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "chat_room"
+     1 + 1
+    byebug
+    stream_from "chat_room"
   end
 
   def unsubscribed
@@ -11,3 +13,6 @@ class ChatChannel < ApplicationCable::Channel
   def chat
   end
 end
+
+
+# connection Object
