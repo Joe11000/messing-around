@@ -1,10 +1,1 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
-// $(function() {
-//  document.querySelectorAll('td')[0].style.color = 'green'
-//  $('td').css('color' , 'green')
-
-// });
-
 App.cable.subscriptions.create { channel: "ChatChannel", room: "Best Room" }
